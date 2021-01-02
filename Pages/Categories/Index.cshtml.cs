@@ -19,13 +19,11 @@ namespace Crisan_Gabriel_Lab8.Pages.Categories
             _context = context;
         }
 
-        public IList<BookCategory> BookCategory { get;set; }
+        public IList<Category> Category { get;set; }
 
         public async Task OnGetAsync()
         {
-            BookCategory = await _context.BookCategory
-                .Include(b => b.Book)
-                .Include(b => b.Category).ToListAsync();
+            Category = await _context.Category.ToListAsync();
         }
     }
 }

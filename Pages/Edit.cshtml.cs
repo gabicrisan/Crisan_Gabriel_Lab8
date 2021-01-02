@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Crisan_Gabriel_Lab8.Data;
 using Crisan_Gabriel_Lab8.Models;
 
-namespace Crisan_Gabriel_Lab8.Pages.Categories
+namespace Crisan_Gabriel_Lab8.Pages
 {
     public class EditModel : PageModel
     {

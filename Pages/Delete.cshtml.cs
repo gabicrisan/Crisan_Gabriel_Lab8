@@ -8,17 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using Crisan_Gabriel_Lab8.Data;
 using Crisan_Gabriel_Lab8.Models;
 
-namespace Crisan_Gabriel_Lab8.Pages.Categories
+namespace Crisan_Gabriel_Lab8.Pages
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly Crisan_Gabriel_Lab8.Data.Crisan_Gabriel_Lab8Context _context;
 
-        public DetailsModel(Crisan_Gabriel_Lab8.Data.Crisan_Gabriel_Lab8Context context)
+        public DeleteModel(Crisan_Gabriel_Lab8.Data.Crisan_Gabriel_Lab8Context context)
         {
             _context = context;
         }
 
+        [BindProperty]
         public Category Category { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -35,6 +36,24 @@ namespace Crisan_Gabriel_Lab8.Pages.Categories
                 return NotFound();
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Category = await _context.Category.FindAsync(id);
+
+            if (Category != null)
+            {
+                _context.Category.Remove(Category);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
